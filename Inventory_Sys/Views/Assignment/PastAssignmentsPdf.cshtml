@@ -1,0 +1,58 @@
+﻿
+@using Inventory_Sys.Models
+@model List<PastAssignment_tbl>
+@{
+    ViewBag.Title = "AssignmentsPdf";
+    Layout = null;
+}
+
+
+<html>
+<head>
+    <title>Past Assignments PDF</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Past Assignments</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>SerialNumber</th>
+                <th>AssignedTo</th>
+                <th>AssignedBy</th>
+                <th>AssignmentDate</th>
+                <th>ReturnDate</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var passign in Model)
+            {
+                <tr>
+                    <td>@passign.SerialNumber</td>
+                    <td>@passign.AssignedTo</td>
+                    <td>@passign.AssignedBy</td>
+                    <td>@passign.AssignmentDate</td>
+                    <td>@passign.ReturnDate</td>
+                    <td>@passign.Notes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

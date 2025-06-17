@@ -1,0 +1,76 @@
+﻿@model Inventory_Sys.Models.Devices_tbl
+
+@{
+    ViewBag.Title = "Edit Device";
+}
+
+<div class="absolute top-20 pr-8 left-0 lg:left-80 z-0 px-4 h-full w-full md:w-4/5">
+    <div class="flex items-center justify-between bg-white shadow-md p-4">
+        <h1 class="text-xl font-bold">Edit Device</h1>
+        <a href="@Url.Action("Devices", "Device", new { area = "" })" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition">Back To Devices</a>
+    </div>
+
+    <div class="max-w-4xl mx-auto mt-8 bg-white p-6 rounded-md shadow-md">
+        @using (Html.BeginForm("DeviceEdit", "Device", FormMethod.Post, new { @class = "space-y-4" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.DeviceID)
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="Brand" class="block text-sm font-medium text-gray-700">Brand</label>
+                    @Html.TextBoxFor(model => model.Brand, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                </div>
+                <div>
+                    <label for="Model" class="block text-sm font-medium text-gray-700">Model</label>
+                    @Html.TextBoxFor(model => model.Model, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="SerialNumber" class="block text-sm font-medium text-gray-700">Serial Number</label>
+                    @Html.TextBoxFor(model => model.SerialNumber, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                </div>
+                <div>
+                    <label for="PurchaseDate" class="block text-sm font-medium text-gray-700">Purchase Date</label>
+                    @Html.TextBoxFor(model => model.PurchaseDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="Status" class="block text-sm font-medium text-gray-700">Status</label>
+                    @Html.DropDownListFor(model => model.Status, (SelectList)ViewBag.StatusList, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" })
+                </div>
+                <div>
+                    <label for="Retired" class="block text-sm font-medium text-gray-700">Retired</label>
+                    @Html.DropDownListFor(model => model.Retired, (SelectList)ViewBag.RetiredList, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" })
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="DeviceTypeID" class="block text-sm font-medium text-gray-700">Device Type</label>
+                    @Html.DropDownListFor(model => model.DeviceTypeID, (SelectList)ViewBag.DeviceTypes, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                </div>
+                <div>
+                    <label for="LastMaintenanceDate" class="block text-sm font-medium text-gray-700">Last Maintenance Date</label>
+                    @Html.TextBoxFor(model => model.LastMaintenanceDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="Details" class="block text-sm font-medium text-gray-700">Details</label>
+                    @Html.TextBoxFor(model => model.Details, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                </div>
+         
+            </div>
+
+            <div class="flex justify-end">
+                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition">Save Changes</button>
+            </div>
+        } <!-- Closing the using block -->
+    </div>
+</div>

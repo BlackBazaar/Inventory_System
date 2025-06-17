@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "AddDevice";
+}
+
+<div class="absolute top-20 pr-8 left-0 lg:left-80 z-0 px-4 h-full w-full md:w-4/5">
+
+    <div class="flex items-center justify-between bg-white shadow-md p-4">
+        <h1 class="text-xl font-bold">Add Device</h1>
+        <a href="@Url.Action("AddDeviceType", "DeviceType", new { area = "" })" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition">Add Device Type</a>
+        <a href="@Url.Action("Devices", "Device", new { area = "" })" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition">Back To Devices</a>
+    </div>
+
+    <div class="max-w-4xl mx-auto mt-8 bg-white p-6 rounded-md shadow-md">
+        @using (Html.BeginForm("AddDevice", "Device", FormMethod.Post, new { @class = "space-y-4" }))
+        {
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="Brand" class="block text-sm font-medium text-gray-700">Brand</label>
+                    <input type="text" id="Brand" name="Brand" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+                </div>
+                <div>
+                    <label for="Model" class="block text-sm font-medium text-gray-700">Model</label>
+                    <input type="text" id="Model" name="Model" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="SerialNumber" class="block text-sm font-medium text-gray-700">Serial Number</label>
+                    <input type="text" id="SerialNumber" name="SerialNumber" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+                </div>
+                <div>
+                    <label for="PurchaseDate" class="block text-sm font-medium text-gray-700">Purchase Date</label>
+                    <input type="date" id="PurchaseDate" name="PurchaseDate" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="Status" class="block text-sm font-medium text-gray-700">Status</label>
+                    <select id="Status" name="Status" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                        <option value="Available">Available</option>
+                        <option value="Assigned">Assigned</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="Retired" class="block text-sm font-medium text-gray-700">Retired</label>
+                    <select id="Retired" name="Retired" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                        <option value="False">No</option>
+                        <option value="True">Yes</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="DeviceTypeID" class="block text-sm font-medium text-gray-700">Device Type</label>
+                    @Html.DropDownList("DeviceTypeID", (SelectList)ViewBag.DeviceTypes, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                </div>
+                <div>
+                    <label for="LastMaintenanceDate" class="block text-sm font-medium text-gray-700">Last Maintenance Date</label>
+                    <input type="date" id="LastMaintenanceDate" name="LastMaintenanceDate" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="Details" class="block text-sm font-medium text-gray-700">Details</label>
+                    <input type="text" id="Details" name="Details" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                </div>
+          
+            </div>
+
+            <div class="flex justify-end">
+                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition">Add Device</button>
+            </div>
+        }
+    </div>
+</div>

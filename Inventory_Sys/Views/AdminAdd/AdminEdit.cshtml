@@ -1,0 +1,67 @@
+﻿@model Inventory_Sys.Models.Admin_tbl
+@{
+    ViewBag.Title = "AdminEdit";
+}
+
+<h2>Employee Edit</h2>
+
+<div class="absolute top-20 pr-8 left-0 lg:left-80 z-0 px-4 h-full w-full md:w-4/5">
+    <div class="flex items-center justify-between bg-white shadow-md p-4">
+        <h1 class="text-xl font-bold">Update Employee</h1>
+        <a href="@Url.Action("Admins", "AdminAdd", new { area = "" })" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition">Back to Employees</a>
+    </div>
+    <div class="max-w-4xl mx-auto mt-8 bg-white p-6 rounded-md shadow-md">
+        @using (Html.BeginForm("AdminEdit", "AdminAdd", FormMethod.Post, new { @class = "space-y-4" }))
+        {
+            @Html.HiddenFor(model => model.AdminID)
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="FirstName" class="block text-sm font-medium text-gray-700">First Name</label>
+                    @Html.TextBoxFor(model => model.FirstName, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" })
+                </div>
+                <div>
+                    <label for="LastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+                    @Html.TextBoxFor(model => model.LastName, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" })
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="Department" class="block text-sm font-medium text-gray-700">Department</label>
+                    @Html.TextBoxFor(model => model.Department, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" })
+                </div>
+                <div>
+                    <label for="Email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                    @Html.TextBoxFor(model => model.Email, new { @readonly = "readonly", @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" })
+
+
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="Role" class="block text-sm font-medium text-gray-700">Role</label>
+                    @Html.DropDownListFor(m => m.Role, new SelectList(new List<SelectListItem>
+                      {
+                      new SelectListItem { Text = "Admin", Value = "Admin" },
+                      new SelectListItem { Text = "SuperAdmin", Value = "SuperAdmin" }
+                    }, "Value", "Text"), new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                    @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    <label for="PhoneNumber" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="mb-4">
+                @Html.HiddenFor(model => model.Password, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" })
+            </div>
+
+            <div class="flex justify-end">
+                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition">Update</button>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InventorySYS_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin_tbl">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AuditLogs" Relationship="Self.FK_AuditLog_tbl_Admin_tbl1" FromRole="Admin_tbl" ToRole="AuditLog" />
+    <NavigationProperty Name="DeviceAssignment_tbl" Relationship="Self.FK_DeviceAssignment_tbl_Admin_tbl" FromRole="Admin_tbl" ToRole="DeviceAssignment_tbl" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AuditLog">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LogDate" Type="DateTime" Precision="0" />
+    <Property Name="AdminID" Type="Int32" />
+    <Property Name="Action" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Admin_tbl" Relationship="Self.FK_AuditLog_tbl_Admin_tbl1" FromRole="AuditLog" ToRole="Admin_tbl" />
+  </EntityType>
+  <EntityType Name="Device_Type_tbl">
+    <Key>
+      <PropertyRef Name="DeviceTypeID" />
+    </Key>
+    <Property Name="DeviceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Devices_tbl" Relationship="Self.FK_Devices_tbl_Device_Type_tbl" FromRole="Device_Type_tbl" ToRole="Devices_tbl" />
+  </EntityType>
+  <EntityType Name="DeviceAssignment_tbl">
+    <Key>
+      <PropertyRef Name="AssignmentID" />
+    </Key>
+    <Property Name="AssignmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DeviceID" Type="Int32" />
+    <Property Name="AssignedToEmployeeID" Type="Int32" />
+    <Property Name="AssignedByAdminID" Type="Int32" />
+    <Property Name="AssignmentDate" Type="DateTime" Precision="0" />
+    <Property Name="ReturnDate" Type="DateTime" Precision="0" />
+    <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Returned" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Admin_tbl" Relationship="Self.FK_DeviceAssignment_tbl_Admin_tbl" FromRole="DeviceAssignment_tbl" ToRole="Admin_tbl" />
+    <NavigationProperty Name="Devices_tbl" Relationship="Self.FK_DeviceAssignment_tbl_Devices_tbl" FromRole="DeviceAssignment_tbl" ToRole="Devices_tbl" />
+    <NavigationProperty Name="Employee_tbl" Relationship="Self.FK_DeviceAssignment_tbl_Employee_tbl" FromRole="DeviceAssignment_tbl" ToRole="Employee_tbl" />
+    <Property Name="SerialNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AssignedToEmployee" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AssignedByAdmin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Devices_tbl">
+    <Key>
+      <PropertyRef Name="DeviceID" />
+    </Key>
+    <Property Name="DeviceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DeviceTypeID" Type="Int32" />
+    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SerialNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PurchaseDate" Type="DateTime" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastMaintenanceDate" Type="DateTime" Precision="0" />
+    <Property Name="Retired" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Device_Type_tbl" Relationship="Self.FK_Devices_tbl_Device_Type_tbl" FromRole="Devices_tbl" ToRole="Device_Type_tbl" />
+    <NavigationProperty Name="DeviceAssignment_tbl" Relationship="Self.FK_DeviceAssignment_tbl_Devices_tbl" FromRole="Devices_tbl" ToRole="DeviceAssignment_tbl" />
+  </EntityType>
+  <EntityType Name="Employee_tbl">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DeviceAssignment_tbl" Relationship="Self.FK_DeviceAssignment_tbl_Employee_tbl" FromRole="Employee_tbl" ToRole="DeviceAssignment_tbl" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_AuditLog_tbl_Admin_tbl1">
+    <End Role="Admin_tbl" Type="Self.Admin_tbl" Multiplicity="0..1" />
+    <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin_tbl">
+        <PropertyRef Name="AdminID" />
+      </Principal>
+      <Dependent Role="AuditLog">
+        <PropertyRef Name="AdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeviceAssignment_tbl_Admin_tbl">
+    <End Role="Admin_tbl" Type="Self.Admin_tbl" Multiplicity="0..1" />
+    <End Role="DeviceAssignment_tbl" Type="Self.DeviceAssignment_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin_tbl">
+        <PropertyRef Name="AdminID" />
+      </Principal>
+      <Dependent Role="DeviceAssignment_tbl">
+        <PropertyRef Name="AssignedByAdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Devices_tbl_Device_Type_tbl">
+    <End Role="Device_Type_tbl" Type="Self.Device_Type_tbl" Multiplicity="0..1" />
+    <End Role="Devices_tbl" Type="Self.Devices_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Device_Type_tbl">
+        <PropertyRef Name="DeviceTypeID" />
+      </Principal>
+      <Dependent Role="Devices_tbl">
+        <PropertyRef Name="DeviceTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeviceAssignment_tbl_Devices_tbl">
+    <End Role="Devices_tbl" Type="Self.Devices_tbl" Multiplicity="0..1" />
+    <End Role="DeviceAssignment_tbl" Type="Self.DeviceAssignment_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Devices_tbl">
+        <PropertyRef Name="DeviceID" />
+      </Principal>
+      <Dependent Role="DeviceAssignment_tbl">
+        <PropertyRef Name="DeviceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeviceAssignment_tbl_Employee_tbl">
+    <End Role="Employee_tbl" Type="Self.Employee_tbl" Multiplicity="0..1" />
+    <End Role="DeviceAssignment_tbl" Type="Self.DeviceAssignment_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee_tbl">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="DeviceAssignment_tbl">
+        <PropertyRef Name="AssignedToEmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InventorySYS_dbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admin_tbl" EntityType="Self.Admin_tbl" />
+    <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
+    <EntitySet Name="Device_Type_tbl" EntityType="Self.Device_Type_tbl" />
+    <EntitySet Name="DeviceAssignment_tbl" EntityType="Self.DeviceAssignment_tbl" />
+    <EntitySet Name="Devices_tbl" EntityType="Self.Devices_tbl" />
+    <EntitySet Name="Employee_tbl" EntityType="Self.Employee_tbl" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_AuditLog_tbl_Admin_tbl1" Association="Self.FK_AuditLog_tbl_Admin_tbl1">
+      <End Role="Admin_tbl" EntitySet="Admin_tbl" />
+      <End Role="AuditLog" EntitySet="AuditLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeviceAssignment_tbl_Admin_tbl" Association="Self.FK_DeviceAssignment_tbl_Admin_tbl">
+      <End Role="Admin_tbl" EntitySet="Admin_tbl" />
+      <End Role="DeviceAssignment_tbl" EntitySet="DeviceAssignment_tbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Devices_tbl_Device_Type_tbl" Association="Self.FK_Devices_tbl_Device_Type_tbl">
+      <End Role="Device_Type_tbl" EntitySet="Device_Type_tbl" />
+      <End Role="Devices_tbl" EntitySet="Devices_tbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeviceAssignment_tbl_Devices_tbl" Association="Self.FK_DeviceAssignment_tbl_Devices_tbl">
+      <End Role="Devices_tbl" EntitySet="Devices_tbl" />
+      <End Role="DeviceAssignment_tbl" EntitySet="DeviceAssignment_tbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeviceAssignment_tbl_Employee_tbl" Association="Self.FK_DeviceAssignment_tbl_Employee_tbl">
+      <End Role="Employee_tbl" EntitySet="Employee_tbl" />
+      <End Role="DeviceAssignment_tbl" EntitySet="DeviceAssignment_tbl" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(InventorySYS_dbModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(InventorySYS_dbModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="Department_tbl" EntityType="InventorySYS_dbModel.Department_tbl" />
+    <EntitySet Name="PastAssignment_tbl" EntityType="InventorySYS_dbModel.PastAssignment_tbl" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="Department_tbl">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="PastAssignment_tbl">
+    <Key>
+      <PropertyRef Name="PastID" />
+    </Key>
+    <Property Name="PastID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssignedTo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AssignedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AssignmentDate" Type="DateTime" Precision="0" />
+    <Property Name="ReturnDate" Type="DateTime" Precision="0" />
+    <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Returned" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SerialNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

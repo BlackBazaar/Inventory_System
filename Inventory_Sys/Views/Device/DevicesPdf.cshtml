@@ -1,0 +1,63 @@
+﻿@using Inventory_Sys.Models
+@model List<Devices_tbl>
+
+@{
+    ViewBag.Title = "DevicesPdf";
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>Devices PDF</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Devices</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>SerialNumber</th>
+                <th>PurchaseDate</th>
+                <th>Status</th>
+                <th>LastMaintenanceDate</th>
+                <th>Retired</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var device in Model)
+            {
+                <tr>
+                    <td>@device.Brand</td>
+                    <td>@device.Model</td>
+                    <td>@device.SerialNumber</td>
+                    <td>@device.PurchaseDate</td>
+                    <td>@device.Status</td>
+                    <td>@device.LastMaintenanceDate</td>
+                    <td>@device.Retired</td>
+                    <td>@device.Details</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+
+

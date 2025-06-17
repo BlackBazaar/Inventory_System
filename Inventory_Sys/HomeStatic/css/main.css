@@ -1,0 +1,51 @@
+*, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Hide any overflow */
+}
+
+::-moz-selection {
+  background-color: #3fc979;
+  color: #FFFFFF;
+}
+
+::selection {
+  background-color: #3fc979;
+  color: #FFFFFF;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #3fc979;
+  outline: 0;
+}
+
+#sidenav::-moz-selection {
+  background-color: #3fc979;
+  color: #FFFFFF;
+}
+
+#sidenav::selection {
+  background-color: #3fc979;
+  color: #FFFFFF;
+}
+
+#sidenav::-webkit-scrollbar {
+  width: 5px;
+}
+
+#sidenav::-webkit-scrollbar-thumb {
+  background-color: #3fc979;
+  outline: 0;
+}
+.default-link {
+    color: white;
+    background-color: blue;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+/*# sourceMappingURL=main.css.map */

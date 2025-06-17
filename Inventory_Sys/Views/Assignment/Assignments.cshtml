@@ -1,0 +1,45 @@
+﻿@model List<Inventory_Sys.Models.AssignmentViewModel>
+@{
+    ViewBag.Title = "Assignments";
+}
+
+<div class="absolute top-20 pr-8 left-0 lg:left-80 z-0 px-4 h-full w-full md:w-4/5">
+    <table class="table-auto w-full">
+        <thead>
+            <tr class="bg-gray-100 text-left">
+                <th class="px-4 py-2">Device SerialNumber</th>
+                <th class="px-4 py-2">AssignedTo</th>
+                <th class="px-4 py-2">AssignedBy</th>
+                <th class="px-4 py-2">AssignmentDate</th>
+                <th class="px-4 py-2">Notes</th>
+                <th><a href="@Url.Action("AssignmentsPdf", "Assignment")" style=" color: white; background-color: blue; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Get PDF</a></th>
+                <th class="px-4 py-2"><a href="@Url.Action("PastAssignments", "Assignment", new { area = "" })" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md transition">Past</a></th>
+                <th class="px-4 py-2">
+                    <a href="@Url.Action("AddAssign", "Assignment", new { area = "" })" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition">Assign</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var assignment in Model)
+            {
+                <tr class="border-b border-gray-200">
+                    <td class="px-4 py-2">@assignment.DeviceSerialNumber</td>
+                    <td class="px-4 py-2">@assignment.AssignedTo</td>
+                    <td class="px-4 py-2">@assignment.AssignedBy</td>
+                    <td class="px-4 py-2">@assignment.AssignmentDate</td>
+                    <td class="px-4 py-2">@assignment.Notes</td>
+                    <td></td>
+                    <td class="px-4 py-2">
+                        @if (Session["Role"].ToString() == "SuperAdmin")
+                        {
+                            <a href="/Assignment/DeleteAssign/@assignment.AssignmentID" class="text-red-600 hover:text-red-900">Delete</a>
+                        }
+                    </td>
+                    <td class="px-4 py-2">
+                        <a href="/Assignment/ConfirmAssign/@assignment.AssignmentID" class="ml-2 text-green-600 hover:text-green-900">Confirm Returned</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

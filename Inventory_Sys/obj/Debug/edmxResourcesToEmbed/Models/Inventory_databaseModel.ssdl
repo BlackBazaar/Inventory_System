@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InventorySYS_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin_tbl">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="250" />
+    <Property Name="Role" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Department" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="AuditLog">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LogDate" Type="date" />
+    <Property Name="AdminID" Type="int" />
+    <Property Name="Action" Type="nvarchar" MaxLength="100" />
+    <Property Name="Details" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Department_tbl">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartmentName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Device_Type_tbl">
+    <Key>
+      <PropertyRef Name="DeviceTypeID" />
+    </Key>
+    <Property Name="DeviceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="DeviceAssignment_tbl">
+    <Key>
+      <PropertyRef Name="AssignmentID" />
+    </Key>
+    <Property Name="AssignmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DeviceID" Type="int" />
+    <Property Name="AssignedToEmployeeID" Type="int" />
+    <Property Name="AssignedByAdminID" Type="int" />
+    <Property Name="AssignmentDate" Type="date" />
+    <Property Name="ReturnDate" Type="date" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+    <Property Name="Returned" Type="nvarchar" MaxLength="50" />
+    <Property Name="SerialNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="AssignedToEmployee" Type="nvarchar" MaxLength="100" />
+    <Property Name="AssignedByAdmin" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Devices_tbl">
+    <Key>
+      <PropertyRef Name="DeviceID" />
+    </Key>
+    <Property Name="DeviceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DeviceTypeID" Type="int" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="SerialNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="PurchaseDate" Type="date" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastMaintenanceDate" Type="date" />
+    <Property Name="Retired" Type="nvarchar" MaxLength="100" />
+    <Property Name="Details" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Employee_tbl">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Department" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="250" />
+    <Property Name="Role" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PastAssignment_tbl">
+    <Key>
+      <PropertyRef Name="PastID" />
+    </Key>
+    <Property Name="PastID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssignedTo" Type="nvarchar" MaxLength="100" />
+    <Property Name="AssignedBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="AssignmentDate" Type="date" />
+    <Property Name="ReturnDate" Type="date" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+    <Property Name="Returned" Type="nvarchar" MaxLength="50" />
+    <Property Name="SerialNumber" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_AuditLog_tbl_Admin_tbl1">
+    <End Role="Admin_tbl" Type="Self.Admin_tbl" Multiplicity="0..1" />
+    <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin_tbl">
+        <PropertyRef Name="AdminID" />
+      </Principal>
+      <Dependent Role="AuditLog">
+        <PropertyRef Name="AdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeviceAssignment_tbl_Admin_tbl">
+    <End Role="Admin_tbl" Type="Self.Admin_tbl" Multiplicity="0..1" />
+    <End Role="DeviceAssignment_tbl" Type="Self.DeviceAssignment_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin_tbl">
+        <PropertyRef Name="AdminID" />
+      </Principal>
+      <Dependent Role="DeviceAssignment_tbl">
+        <PropertyRef Name="AssignedByAdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeviceAssignment_tbl_Devices_tbl">
+    <End Role="Devices_tbl" Type="Self.Devices_tbl" Multiplicity="0..1" />
+    <End Role="DeviceAssignment_tbl" Type="Self.DeviceAssignment_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Devices_tbl">
+        <PropertyRef Name="DeviceID" />
+      </Principal>
+      <Dependent Role="DeviceAssignment_tbl">
+        <PropertyRef Name="DeviceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeviceAssignment_tbl_Employee_tbl">
+    <End Role="Employee_tbl" Type="Self.Employee_tbl" Multiplicity="0..1" />
+    <End Role="DeviceAssignment_tbl" Type="Self.DeviceAssignment_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee_tbl">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="DeviceAssignment_tbl">
+        <PropertyRef Name="AssignedToEmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Devices_tbl_Device_Type_tbl">
+    <End Role="Device_Type_tbl" Type="Self.Device_Type_tbl" Multiplicity="0..1" />
+    <End Role="Devices_tbl" Type="Self.Devices_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Device_Type_tbl">
+        <PropertyRef Name="DeviceTypeID" />
+      </Principal>
+      <Dependent Role="Devices_tbl">
+        <PropertyRef Name="DeviceTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="InventorySYS_dbModelStoreContainer">
+    <EntitySet Name="Admin_tbl" EntityType="Self.Admin_tbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department_tbl" EntityType="Self.Department_tbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Device_Type_tbl" EntityType="Self.Device_Type_tbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeviceAssignment_tbl" EntityType="Self.DeviceAssignment_tbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Devices_tbl" EntityType="Self.Devices_tbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_tbl" EntityType="Self.Employee_tbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PastAssignment_tbl" EntityType="Self.PastAssignment_tbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AuditLog_tbl_Admin_tbl1" Association="Self.FK_AuditLog_tbl_Admin_tbl1">
+      <End Role="Admin_tbl" EntitySet="Admin_tbl" />
+      <End Role="AuditLog" EntitySet="AuditLog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeviceAssignment_tbl_Admin_tbl" Association="Self.FK_DeviceAssignment_tbl_Admin_tbl">
+      <End Role="Admin_tbl" EntitySet="Admin_tbl" />
+      <End Role="DeviceAssignment_tbl" EntitySet="DeviceAssignment_tbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeviceAssignment_tbl_Devices_tbl" Association="Self.FK_DeviceAssignment_tbl_Devices_tbl">
+      <End Role="Devices_tbl" EntitySet="Devices_tbl" />
+      <End Role="DeviceAssignment_tbl" EntitySet="DeviceAssignment_tbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeviceAssignment_tbl_Employee_tbl" Association="Self.FK_DeviceAssignment_tbl_Employee_tbl">
+      <End Role="Employee_tbl" EntitySet="Employee_tbl" />
+      <End Role="DeviceAssignment_tbl" EntitySet="DeviceAssignment_tbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Devices_tbl_Device_Type_tbl" Association="Self.FK_Devices_tbl_Device_Type_tbl">
+      <End Role="Device_Type_tbl" EntitySet="Device_Type_tbl" />
+      <End Role="Devices_tbl" EntitySet="Devices_tbl" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

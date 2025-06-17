@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "AddAssign";
+}
+
+<div class="absolute top-20 pr-8 left-0 lg:left-80 z-0 px-4 h-full w-full md:w-4/5">
+
+    <div class="flex items-center justify-between bg-white shadow-md p-4">
+        <h1 class="text-xl font-bold">Device Assign</h1>
+        <a href="@Url.Action("Assignments", "Assignment", new { area = "" })" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition">Back To Assignments</a>
+    </div>
+
+    <div class="max-w-4xl mx-auto mt-8 bg-white p-6 rounded-md shadow-md">
+        @using (Html.BeginForm("AddAssign", "Assignment", FormMethod.Post, new { @class = "space-y-4", id = "assignForm" }))
+        {
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="Brand" class="block text-sm font-medium text-gray-700">Brand</label>
+                    @Html.DropDownList("Brand", ViewBag.Brands as SelectList, "Select Brand", new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", required = "required" })
+                </div>
+                <div>
+                    <label for="Model" class="block text-sm font-medium text-gray-700">Model</label>
+                    <select id="Model" name="Model" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                        <option value="">Select Model</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="SerialNumber" class="block text-sm font-medium text-gray-700">Serial Number</label>
+                    <select id="SerialNumber" name="SerialNumber" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                        <option value="">Select Serial Number</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="AssignTo" class="block text-sm font-medium text-gray-700">Assign To</label>
+                    @Html.DropDownList("AssignedToEmployeeID", ViewBag.Employees as SelectList, "Select Employee", new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", required = "required" })
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="Notes" class="block text-sm font-medium text-gray-700">Notes</label>
+                    <input type="text" id="Notes" name="Notes" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            </div>
+
+            <div class="flex justify-end">
+                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition">Assign Device</button>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Brand').change(function () {
+                var brand = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("GetModels", "Assignment")',
+                    type: 'GET',
+                    data: { brand: brand },
+                    success: function (data) {
+                        $('#Model').empty().append('<option value="">Select Model</option>');
+                        $.each(data, function (index, value) {
+                            $('#Model').append('<option value="' + value + '">' + value + '</option>');
+                        });
+                    }
+                });
+            });
+
+            $('#Model').change(function () {
+                var model = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("GetSerialNumbers", "Assignment")',
+                    type: 'GET',
+                    data: { model: model },
+                    success: function (data) {
+                        $('#SerialNumber').empty().append('<option value="">Select Serial Number</option>');
+                        $.each(data, function (index, value) {
+                            $('#SerialNumber').append('<option value="' + value + '">' + value + '</option>');
+                        });
+                    }
+                });
+            });
+
+            $('#assignForm').submit(function() {
+                if ($('#Brand').val() === "" || $('#Model').val() === "" || $('#SerialNumber').val() === "" || $('#AssignedToEmployeeID').val() === "") {
+                    alert("Please make sure all required fields are selected.");
+                    return false;
+                }
+
+                return true;
+            });
+        });
+    </script>
+}

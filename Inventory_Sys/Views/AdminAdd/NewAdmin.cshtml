@@ -1,0 +1,71 @@
+﻿@model Inventory_Sys.Models.Admin_tbl
+@{
+    ViewBag.Title = "NewAdmin";
+}
+
+<h2>Add Admin</h2>
+
+<div class="absolute top-20 pr-8 left-0 lg:left-80 z-0 px-4 h-full w-full md:w-4/5">
+
+    <div class="flex items-center justify-between bg-white shadow-md p-4">
+        <h1 class="text-xl font-bold">Add Admin</h1>
+        <a href="@Url.Action("Admins", "AdminAdd", new { area = "" })" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition">Back to Admins</a>
+    </div>
+    <div class="max-w-4xl mx-auto mt-8 bg-white p-6 rounded-md shadow-md">
+        @using (Html.BeginForm("NewAdmin", "AdminAdd", FormMethod.Post, new { @class = "space-y-4" }))
+        {
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="FirstName" class="block text-sm font-medium text-gray-700">First Name</label>
+                    <input type="text" id="FirstName" name="FirstName" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+                </div>
+                <div>
+                    <label for="LastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+                    <input type="text" id="LastName" name="LastName" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="Department" class="block text-sm font-medium text-gray-700">Department</label>
+                    <input type="text" id="Department" name="Department" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+                </div>
+                <div>
+                    <label for="Email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                    <input type="email" id="Email" name="Email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="Role" class="block text-sm font-medium text-gray-700">Role</label>
+                    @Html.DropDownListFor(m => m.Role, new SelectList(new List<SelectListItem>
+                    {
+                    new SelectListItem { Text = "Admin", Value = "Admin" },
+                    new SelectListItem { Text = "SuperAdmin", Value = "SuperAdmin" }
+                }, "Value", "Text"), new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    <label for="PhoneNumber" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <input type="tel" id="PhoneNumber" name="PhoneNumber" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="Password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="text" id="Password" name="Password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="flex justify-end">
+                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition">Add Admin</button>
+            </div>
+        }
+    </div>
+
+</div>
+

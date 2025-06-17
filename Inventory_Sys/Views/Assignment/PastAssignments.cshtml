@@ -1,0 +1,48 @@
+﻿@using Inventory_Sys.Models
+@model List<PastAssignment_tbl>
+@{
+    ViewBag.Title = "PastAssignments";
+}
+
+<!--page content-->
+<div class="absolute top-20 pr-8 left-0 lg:left-80 z-0 px-4 h-full w-full md:w-4/5">
+    <table class="table-auto w-full">
+        <thead>
+            <tr class="bg-gray-100 text-left">
+                <th class="px-4 py-2">SerialNumber</th>
+                <th class="px-4 py-2">AssignedTo</th>
+                <th class="px-4 py-2">AssignedBy</th>
+                <th class="px-4 py-2">AssignmentDate</th>
+                <th class="px-4 py-2">ReturnDate</th>
+                <th class="px-4 py-2">Notes</th>
+                <th class="px-4 py-2">
+                    <a href="@Url.Action("PastAssignmentsPdf", "Assignment")" style="color: white; background-color: blue; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Get PDF</a>
+                </th>
+                <th class="px-4 py-2">
+                    <a href="@Url.Action("Assignments", "Assignment", new { area = "" })" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition">Back to Assignments</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var passign in Model)
+            {
+                <tr class="border-b border-gray-200">
+                    <td class="px-4 py-2">@passign.SerialNumber</td>
+                    <td class="px-4 py-2">@passign.AssignedTo</td>
+                    <td class="px-4 py-2">@passign.AssignedBy</td>
+                    <td class="px-4 py-2">@passign.AssignmentDate</td>
+                    <td class="px-4 py-2">@passign.ReturnDate</td>
+                    <td class="px-4 py-2">@passign.Notes</td> <!-- Corrected position -->
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2">
+                        @if (Session["Role"].ToString() == "SuperAdmin")
+                        {
+                            <a href="/Assignment/RemovePastAssignment/@passign.PastID" class="text-red-600 hover:text-red-900">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<!--/page content-->

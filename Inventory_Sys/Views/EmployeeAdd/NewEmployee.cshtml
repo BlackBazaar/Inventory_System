@@ -1,0 +1,71 @@
+﻿@model Inventory_Sys.Models.Employee_tbl
+
+@{
+    ViewBag.Title = "EmployeeAdd";
+}
+
+<div class="absolute top-20 pr-8 left-0 lg:left-80 z-0 px-4 h-full w-full md:w-4/5">
+
+    <div class="flex items-center justify-between bg-white shadow-md p-4">
+        <h1 class="text-xl font-bold">Add Employee</h1>
+        <a href="@Url.Action("Employees", "EmployeeAdd", new { area = "" })" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition">Back to Employees</a>
+    </div>
+    <div class="max-w-4xl mx-auto mt-8 bg-white p-6 rounded-md shadow-md">
+        @using (Html.BeginForm("NewEmployee", "EmployeeAdd", FormMethod.Post, new { @class = "space-y-4" }))
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="FirstName" class="block text-sm font-medium text-gray-700">First Name</label>
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    <label for="LastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="Department" class="block text-sm font-medium text-gray-700">Department</label>
+                    @Html.TextBoxFor(m => m.Department, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                    @Html.ValidationMessageFor(m => m.Department, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    <label for="Email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", type = "email", required = "required" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="Role" class="block text-sm font-medium text-gray-700">Role</label>
+                    @Html.DropDownListFor(m => m.Role, new SelectList(new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "Employee", Value = "Employee" }
+                    }, "Value", "Text"), new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                    @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    <label for="PhoneNumber" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", type = "tel" })
+                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="Password" class="block text-sm font-medium text-gray-700">Password</label>
+                @Html.TextBoxFor(m => m.Password, new { @class = "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm", required = "required" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="flex justify-end">
+                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition">Add Employee</button>
+            </div>
+        }
+    </div>
+</div>

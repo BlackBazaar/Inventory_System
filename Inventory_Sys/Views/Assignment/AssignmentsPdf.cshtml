@@ -1,0 +1,56 @@
+﻿@using Inventory_Sys.Models
+@model List<AssignmentViewModel>
+
+@{
+    ViewBag.Title = "AssignmentsPdf";
+    Layout = null;
+}
+
+
+<html>
+<head>
+    <title>Assignments PDF</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Assignments</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Device SerialNumber</th>
+                <th>AssignedTo</th>
+                <th>AssignedBy</th>
+                <th>AssignmentDate</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var assignment in Model)
+            {
+                <tr>
+                    <td>@assignment.DeviceSerialNumber</td>
+                    <td>@assignment.AssignedTo</td>
+                    <td>@assignment.AssignedBy</td>
+                    <td>@assignment.AssignmentDate</td>
+                    <td>@assignment.Notes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
