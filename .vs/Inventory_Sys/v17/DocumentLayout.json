@@ -1,12 +1,36 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\umut\\Desktop\\OutOf_Lesson\\8Intern Projects\\Project-2 IT Inventory System\\Inventory_SysEng\\Inventory_Sys\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\umut\\Desktop\\OutOf_Lesson\\6Github\\Inventory_Sys\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1E369CCC-0D86-432C-A17C-B54F727E6826}|Inventory_Sys\\Inventory_Sys.csproj|c:\\users\\umut\\desktop\\outof_lesson\\6github\\inventory_sys\\inventory_sys\\models\\inventory_databasemodel.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
+      "RelativeMoniker": "D:0:0:{1E369CCC-0D86-432C-A17C-B54F727E6826}|Inventory_Sys\\Inventory_Sys.csproj|solutionrelative:inventory_sys\\models\\inventory_databasemodel.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Inventory_databaseModel.edmx [Diagram1]",
+              "DocumentMoniker": "C:\\Users\\umut\\Desktop\\OutOf_Lesson\\6Github\\Inventory_Sys\\Inventory_Sys\\Models\\Inventory_databaseModel.edmx",
+              "RelativeDocumentMoniker": "Inventory_Sys\\Models\\Inventory_databaseModel.edmx",
+              "ToolTip": "C:\\Users\\umut\\Desktop\\OutOf_Lesson\\6Github\\Inventory_Sys\\Inventory_Sys\\Models\\Inventory_databaseModel.edmx [Diagram1]",
+              "RelativeToolTip": "Inventory_Sys\\Models\\Inventory_databaseModel.edmx [Diagram1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001116|",
+              "WhenOpened": "2025-08-12T06:32:32.265Z",
+              "EditorCaption": " [Diagram1]"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
